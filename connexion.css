@@ -1,11 +1,11 @@
 @font-face {
   font-family: "heavy_dataregular";
-  src: url("polices/heavy_data-webfont.eot");
-  src: url("polices/heavy_data-webfont.eot?#iefix") format("embedded-opentype"),
-    url("polices/heavy_data-webfont.woff2") format("woff2"),
-    url("polices/heavy_data-webfont.woff") format("woff"),
-    url("polices/heavy_data-webfont.ttf") format("truetype"),
-    url("polices/heavy_data-webfont.svg#heavy_dataregular") format("svg");
+  src: url("police/heavy_data-webfont.eot");
+  src: url("police/heavy_data-webfont.eot?#iefix") format("embedded-opentype"),
+    url("police/heavy_data-webfont.woff2") format("woff2"),
+    url("police/heavy_data-webfont.woff") format("woff"),
+    url("police/heavy_data-webfont.ttf") format("truetype"),
+    url("police/heavy_data-webfont.svg#heavy_dataregular") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -186,4 +186,85 @@ a {
   font-size: 12px;
   margin-top: -0.1em;
   margin: 1em 1em 0 1.5em;
+}
+
+/* CSS INSCRIPTION */
+
+.formulaireconnex {
+  display: flex;
+  flex-direction: row;
+}
+
+.inscription {
+  margin: 10em 0 0 2.5em;
+  text-align: left;
+  background-color: #fff7f7;
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+  padding: 20px 0 20px 45px;
+  box-shadow: 7px 5px 5px grey;
+  border-radius: 5px;
+  width: 25em;
+}
+
+legend {
+  font-family: "Permanent Marker", cursive;
+  font-size: 25px;
+}
+
+.ins,
+.ins2 {
+  font-family: "Nova Flat", cursive;
+  font-size: 15px;
+  color: black;
+  vertical-align: top;
+}
+
+.place {
+  border-radius: 5px;
+  font-family: "Courier Prime", monospace;
+  padding-left: 5px;
+  color: black;
+  width: 200px;
+  height: 25px;
+}
+
+span {
+  font-size: 12px;
+  opacity: 90%;
+}
+
+aside {
+  width: 25em;
+  background-color: white;
+  min-height: 100vh;
+  margin: -30px;
+  padding-bottom: 30px;
+  margin-left: 11.4em;
+}
+
+#button {
+  background-color: transparent;
+  border: black solid 1px;
+  color: black;
+  padding: 5px 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  cursor: pointer;
+  font-family: "heavy_dataregular";
+  margin-left: 120px;
+}
+
+#journalism {
+  width: 20em;
+  margin: 3em 0 0 3em;
+}
+
+aside h1 {
+  font-family: "Archivo Black", sans-serif;
+  font-size: 2.5em;
+  text-align: right;
+  font-family: "Bebas Neue", cursive;
+  padding-right: 0.5em;
 }
