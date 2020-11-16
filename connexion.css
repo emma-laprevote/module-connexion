@@ -1,0 +1,189 @@
+@font-face {
+  font-family: "heavy_dataregular";
+  src: url("polices/heavy_data-webfont.eot");
+  src: url("polices/heavy_data-webfont.eot?#iefix") format("embedded-opentype"),
+    url("polices/heavy_data-webfont.woff2") format("woff2"),
+    url("polices/heavy_data-webfont.woff") format("woff"),
+    url("polices/heavy_data-webfont.ttf") format("truetype"),
+    url("polices/heavy_data-webfont.svg#heavy_dataregular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* CSS GLOBAL POUR LES TROIS PAGES */
+
+html {
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='0.81' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+header {
+  width: 25%;
+  background-color: black;
+  min-height: 100vh;
+  margin: -30px;
+  padding-bottom: 30px;
+}
+
+body {
+  display: flex;
+  flex-direction: row;
+}
+
+#logo {
+  width: 75%;
+  margin: 4em 0 0 3em;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  margin-top: 17%;
+  padding-left: 50px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 18px;
+  margin-top: 10%;
+}
+
+.icones {
+  margin-left: 7em;
+  opacity: 80%;
+}
+
+/* CSS ACCUEIL*/
+
+.connex {
+  background-color: white;
+  color: black;
+  width: 100%;
+  height: 30px;
+  padding-left: 10px;
+  padding-top: 6px;
+}
+
+#freshnews {
+  background-color: white;
+  width: 65em;
+  height: 120vh;
+  margin: 1em 0 0 1.9em;
+}
+
+#press1 {
+  display: flex;
+  flex-direction: row;
+}
+
+/*CSS ARTICLE PROTHESE*/
+
+#prothese {
+  width: 35em;
+  height: 21em;
+}
+
+.articleprothese {
+  text-align: right;
+  margin: 1em 2em 0 2em;
+}
+
+.articleprothese h1 {
+  margin-top: -1em;
+}
+
+#lienarticle {
+  font-family: "Archivo Black", sans-serif;
+  font-size: 1.5em;
+  color: black;
+}
+
+#lienarticle:hover {
+  color: rgb(77, 75, 75);
+}
+
+.articleprothese h6 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  text-decoration: underline;
+}
+
+.p1 {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5em;
+}
+
+.p2 {
+  font-family: "Courier Prime", monospace;
+  font-size: 12px;
+}
+
+/* CSS ARTICLES*/
+
+.articlerow {
+  display: flex;
+  flex-direction: row;
+}
+
+#console,
+#conchita,
+#vino {
+  width: 95%;
+  margin-top: -0.2em;
+}
+
+#vino {
+  width: 20.1em;
+  margin-left: -1.05em;
+}
+
+#console {
+  width: 20em;
+  padding-left: 2em;
+}
+
+.articleculture h3,
+.articlefood h3,
+.articlegame h3 {
+  margin: 1em 1em 0 1.5em;
+}
+
+.articleculture h6,
+.articlefood h6,
+.articlegame h6 {
+  margin: 2em 1em 0 1.5em;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  text-decoration: underline;
+}
+
+#lienarticle2,
+#lienarticle3,
+#lienarticle4 {
+  font-family: "Archivo Black", sans-serif;
+  font-size: 12px;
+  color: black;
+}
+
+#lienarticle2:hover,
+#lienarticle3:hover,
+#lienarticle4:hover {
+  color: rgb(77, 75, 75);
+}
+
+.p3 {
+  margin: 1em 1em 0 1.5em;
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 12px;
+  line-height: 1.5em;
+}
+
+.p4 {
+  font-family: "Courier Prime", monospace;
+  font-size: 12px;
+  margin-top: -0.1em;
+  margin: 1em 1em 0 1.5em;
+}
