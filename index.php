@@ -35,9 +35,9 @@
             <nav>
                 <a class="connex" href="index.php">Accueil »</a>
 
-                <a href="connexion.php">Connexion »</a>
-        
                 <a href="inscription.php">Inscription »</a>
+
+                <a href="connexion.php">Connexion »</a>
 
                 <a href="profil.php">Mon compte »</a>
                 

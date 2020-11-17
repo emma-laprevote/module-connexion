@@ -38,9 +38,9 @@
         <nav>
             <a href="index.php">Accueil »</a>
 
-            <a href="connexion.php">Connexion »</a>
-        
             <a class="connex" href="inscription.php">Inscription »</a>
+
+            <a href="connexion.php">Connexion »</a>
 
             <a href="profil.php">Mon compte »</a>
                 
@@ -53,7 +53,7 @@
 
         <article>
 
-        <section class="form">
+        <section class="form1">
 
             <form class="inscription" action="inscription.php" method="POST">
                 
@@ -66,7 +66,7 @@
                 <br>
                 <div>
                 <label class="ins" for="prenom">Prénom<span>*</span> :</label>
-                    <input class="place" type="text" name="prenom" placeholder="Votre prénom">
+                    <input class="place" type="text" name="prenom" required placeholder="Votre prénom">
                 </div>
                 <br>
                 <div>
@@ -86,12 +86,12 @@
                 <br>
                 <input id="button" type="submit" name="envoyer" value="Envoyer" /> 
             </form>
-
+            
             <?php
             //Connexion à une base 
             $dsn = 'mysql:dbname=moduleconnexion;host=localhost';
             $user = 'root';
-            $password = '';
+            $password = 'root';
  
                 try { //Vérification de la connexion 
 
