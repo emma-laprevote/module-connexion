@@ -256,13 +256,12 @@ aside {
   margin-left: 120px;
 }
 
-#journalism {
+#journalism1 {
   width: 20em;
   margin: 3em 0 0 3em;
 }
 
-aside h1 {
-  font-family: "Archivo Black", sans-serif;
+.titleaside1 {
   font-size: 2.5em;
   text-align: right;
   font-family: "Bebas Neue", cursive;
@@ -273,4 +272,35 @@ aside h1 {
 
 .form {
   margin-top: 15em;
+}
+
+.titleaside2 {
+  font-size: 3em;
+  text-align: center;
+  font-family: "Bebas Neue", cursive;
+  padding-right: 0.5em;
+  padding-left: 1em;
+  color: rgba(117, 52, 52, 0.986);
+}
+
+.titleaside3 {
+  font-size: 2em;
+  text-align: center;
+  font-family: "Bebas Neue", cursive;
+  padding-right: 0.5em;
+  padding-left: 1em;
+  margin-top: -1.5em;
+}
+
+.titleaside4 {
+  font-family: "heavy_dataregular";
+  font-size: 1.8em;
+  text-align: center;
+  padding-right: 0.5em;
+  padding-left: 1em;
+}
+
+#journalism2 {
+  width: 15em;
+  margin: 3em 0 0 6em;
 }

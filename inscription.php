@@ -94,7 +94,7 @@
             $password = 'root';
  
                 try { //Vérification de la connexion 
-
+                    //Premier essai avec PDO 
                     $dbh = new PDO($dsn, $user, $password); // connexion PDO
 
                 } catch (PDOException $e) {
@@ -115,8 +115,8 @@
         </section>
     </article>
     <aside>
-          <img id="journalism" src="images/giphy.gif" alt=" Animation It takes a journalism"> 
-          <h1>Vivez l'experience Slash magazine, mieux qu'un slasher movie_ </h1>     
+          <img id="journalism1" src="images/giphy.gif" alt=" Animation It takes a journalism"> 
+          <h1 class="titleaside1">Vivez l'experience Slash magazine, mieux qu'un slasher movie_ </h1>     
     </aside>
     </main>
     
