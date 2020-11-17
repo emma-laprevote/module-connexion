@@ -84,10 +84,9 @@
                     <input class="place" type="password" name="password" required placeholder="Password">
                 </div>
                 <br>
-                <input id="button" type="submit" name="envoyer" value="Envoyer" /> 
-            </form>
-            
-            <?php
+                <input id="button" type="submit" name="envoyer" value="Envoyer" />
+
+                <?php
             //Connexion à une base 
             $dsn = 'mysql:dbname=moduleconnexion;host=localhost';
             $user = 'root';
@@ -102,16 +101,25 @@
                     echo 'Connexion échouée : ' . $e->getMessage();
                 }
 
-                if (isset($_POST['envoyer'])) {
+                $count = $dbh->prepare("SELECT COUNT(*) AS nbr FROM utilisateurs WHERE login =?");
+                $count->execute(array($_POST['login']));
+                $req  = $count->fetch(PDO::FETCH_ASSOC);
+
+
+                if (isset($_POST['envoyer']) && $req['nbr'] == 0) {
+
                 $sth = $dbh->prepare("INSERT INTO utilisateurs (login, prenom, nom, password) VALUES(?, ?, ?, ?)");
                 $sth->execute(array($_POST['login'], $_POST['prenom'], $_POST['nom'], $_POST['password']));
            
 
                 header('Location: connexion.php');
                 
+                } elseif (isset($_POST['envoyer']) && $req['nbr'] == 1) { ?>
+                    <p class="loginexist">*Le login est déjà utilisé</p>
+                <?php   
                 }
-            ?>
-
+                ?>
+            </form>
         </section>
     </article>
     <aside>
