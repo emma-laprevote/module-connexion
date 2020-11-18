@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -93,10 +96,10 @@
                 <input id="button" type="submit" name="envoyer" value="Envoyer" />
 
                 <?php
-            //Connexion à une base 
-            $dsn = 'mysql:dbname=moduleconnexion;host=localhost';
-            $user = 'root';
-            $password = 'root';
+                    //Connexion à une base 
+                    $dsn = 'mysql:dbname=moduleconnexion;host=localhost';
+                    $user = 'root';
+                    $password = 'root';
  
                 try { //Vérification de la connexion 
                     //Premier essai avec PDO 
@@ -111,22 +114,26 @@
                 $count->execute(array($_POST['login']));
                 $req  = $count->fetch(PDO::FETCH_ASSOC);
 
-                if (isset($_POST['envoyer']) && $req['nbr'] == 0 && $_POST['confirm_password'] == $_POST['password']) {
+                    if (isset($_POST['envoyer']) && $req['nbr'] == 0 && $_POST['confirm_password'] == $_POST['password']) {
 
-                $sth = $db->prepare("INSERT INTO utilisateurs (login, prenom, nom, password) VALUES(?, ?, ?, ?)");
-                $sth->execute(array($_POST['login'], $_POST['prenom'], $_POST['nom'], $_POST['password']));
+                        $sth = $db->prepare("INSERT INTO utilisateurs (login, prenom, nom, password) VALUES(?, ?, ?, ?)");
+                        $sth->execute(array($_POST['login'], $_POST['prenom'], $_POST['nom'], $_POST['password']));
            
 
-                header('Location: connexion.php');
+                        header('Location: connexion.php');
                 
-                } elseif (isset($_POST['envoyer']) && $req['nbr'] == 1) { ?>
-                    <p class="loginexist">*Le login est déjà utilisé</p>
-                <?php   
-                } elseif ($_POST['confirm_password'] != $_POST['password']) { ?>
-                    <p class="loginexist">* Les 2 mots de passe sont différents</p>
-                <?php
-                }
-                ?>
+                    } elseif (isset($_POST['envoyer']) && $req['nbr'] == 1) { ?>
+
+                        <p class="loginexist">*Le login est déjà utilisé</p>
+
+                    <?php  
+
+                    } elseif ($_POST['confirm_password'] != $_POST['password']) { ?>
+
+                        <p class="loginexist">* Les 2 mots de passe sont différents</p>
+                    <?php
+                    }
+                    ?>
             </form>
         </section>
     </article>

@@ -359,6 +359,34 @@ aside {
   margin-left: 120px;
 }
 
+#buttonvalid {
+  background-color: transparent;
+  border: black solid 1px;
+  color: black;
+  padding: 5px 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  cursor: pointer;
+  font-family: "heavy_dataregular";
+  margin-left: 8em;
+}
+
+#buttondeco {
+  background-color: transparent;
+  border: white solid 1px;
+  color: white;
+  padding: 5px 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  cursor: pointer;
+  font-family: "heavy_dataregular";
+  margin: 2em 0 0 2.5em;
+}
+
 #journalism1 {
   width: 20em;
   margin: 3em 0 0 3em;
@@ -384,25 +412,7 @@ aside {
   font-family: "Courier Prime", monospace;
 }
 
-.titleaside2 {
-  font-size: 3em;
-  text-align: center;
-  font-family: "Bebas Neue", cursive;
-  padding-right: 0.5em;
-  padding-left: 1em;
-  color: rgba(117, 52, 52, 0.986);
-}
-
-.titleaside3 {
-  font-size: 2em;
-  text-align: center;
-  font-family: "Bebas Neue", cursive;
-  padding-right: 0.5em;
-  padding-left: 1em;
-  margin-top: -1.5em;
-}
-
-.titleaside4 {
+.titleaside {
   font-family: "heavy_dataregular";
   font-size: 1.8em;
   text-align: center;
@@ -410,9 +420,13 @@ aside {
   padding-left: 1em;
 }
 
+#asidebloc {
+  margin-top: 10em;
+}
+
 #journalism2 {
   width: 15em;
-  margin: 3em 0 0 6em;
+  margin-left: 6em;
 }
 
 /* CSS PROFIL */

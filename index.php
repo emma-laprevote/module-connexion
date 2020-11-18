@@ -55,7 +55,24 @@
                 ?>
                 <a href="admin.php">Espace admin »</a>
             </nav>
-
+            <section id="deconnexion">
+                <?php
+                if($_SESSION['login'] == "") { ?>
+                
+                <?php
+                } else { ?>
+                    <form class="deconnect" action="index.php" method="POST">
+                    <input id="buttondeco" type="submit" name="deconnecter" value="Deconnection" />
+                    </form>
+                <?php
+                }
+                if(isset($_POST['deconnecter'])) {
+                    session_destroy();
+                    header('Location: index.php');
+                }
+                ?>
+                
+            </section>
         </header>
 
     <main id="accueil">

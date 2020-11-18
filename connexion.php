@@ -81,43 +81,38 @@ session_start();
                 </div>
                 <br>
                 <input id="button" type="submit" name="envoyer" value="Envoyer" /> 
-            </form>
-
-            </section>
-
-        </article>
-            <aside>
-                <img id="journalism2" src="images/giphy2.gif" alt=" Animation ordinateur loading">
-                <h1 class='titleaside4'>connect<br>and change the world!</h1>
-            <?php
+                <?php
                 if(isset($_POST['login']) && isset($_POST['password']))
                 {
-                    // connexion à la base de données
-                    $db_username = 'root';
-                    $db_password = 'root';
-                    $db_name     = 'moduleconnexion';
-                    $db_host     = 'localhost';
-                    $db = mysqli_connect($db_host, $db_username, $db_password,$db_name)
-                    or die('could not connect to database');
-                    
-                    // on applique les deux fonctions mysqli_real_escape_string et htmlspecialchars
-                    // pour éliminer toute attaque de type injection SQL et XSS
-                    $username = mysqli_real_escape_string($db,htmlspecialchars($_POST['login'])); 
-                    $password = mysqli_real_escape_string($db,htmlspecialchars($_POST['password']));
+                    //Connexion à une base 
+                    $dsn = 'mysql:dbname=moduleconnexion;host=localhost';
+                    $user = 'root';
+                    $password = 'root';
+ 
+                    try { //Vérification de la connexion 
+                        
+                        $db = new PDO($dsn, $user, $password); // connexion PDO
+
+                    } catch (PDOException $e) {
+
+                        echo 'Connexion échouée : ' . $e->getMessage();
+                    }
+
+                    $username = ($_POST['login']); 
+                    $password = ($_POST['password']);
                     
                     if (isset($_POST['envoyer'])) {
 
                         if($username !== "" && $password !== ""){
 
-                            $requete = "SELECT count(*) FROM utilisateurs where 
-                            login = '".$username."' and password = '".$password."' ";
-
-                            $exec_requete = mysqli_query($db,$requete);
-
-                            $reponse = mysqli_fetch_array($exec_requete);
-
+                            $requete = $db->prepare("SELECT count(*) FROM utilisateurs where 
+                            login = '".$username."' and password = '".$password."' ");
+                            $requete->execute(array());
+                            $reponse = $requete->fetch(PDO::FETCH_ASSOC);
+            
                             $count = $reponse['count(*)'];
 
+    
                                 if($count!=0) // nom d'utilisateur et mot de passe correctes
                                 {
                                     $_SESSION['login'] = $username; 
@@ -125,18 +120,24 @@ session_start();
                                 } 
                                 else
                                 { ?>
-                         
-            <h1 class="titleaside2">OUP'S!</h1>
-            <h1 class="titleaside3">Ton login ou ton mot de passe est incorrect...</h1>  
-    <?php
-    }
+                                    <p class="loginexist">Ton login ou ton mot de passe est incorrect...</p>  
+                                <?php
+                                }
                         }  
                     }
                 }
 
-                    mysqli_close($db); // fermer la connexion
-
             ?>
+            </form>
+
+            </section>
+
+        </article>
+            <aside>
+                <div id="asidebloc">
+                <img id="journalism2" src="images/giphy2.gif" alt=" Animation ordinateur loading">
+                <h1 class='titleaside'>connect<br>and change the world!</h1>
+                </div>
         </aside>
         </main>
 

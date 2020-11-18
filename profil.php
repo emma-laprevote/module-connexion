@@ -14,8 +14,6 @@ session_start();
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nova+Flat&family=Shadows+Into+Light&display=swap" rel="stylesheet">
 
-   
- 
     
     <title>Mon compte</title>
 </head>
@@ -49,7 +47,7 @@ session_start();
                 <a href="connexion.php">Connexion »</a>
 
                 <a class="connex" href="profil.php">Mon compte »</a>
-            
+                
                 <a href="admin.php">Espace admin »</a>
             </nav>
 
@@ -68,20 +66,25 @@ session_start();
     
             <section id="form3">
                 <?php 
-                $db_username = 'root';
-                $db_password = 'root';
-                $db_name     = 'moduleconnexion';
-                $db_host     = 'localhost';
-                $db = mysqli_connect($db_host, $db_username, $db_password,$db_name)
-                or die('could not connect to database');
+                //Connexion à une base 
+                $dsn = 'mysql:dbname=moduleconnexion;host=localhost';
+                $user = 'root';
+                $password = 'root';
+ 
+                try { //Vérification de la connexion 
+                    //Premier essai avec PDO 
+                    $db = new PDO($dsn, $user, $password); // connexion PDO
 
-                $requete = "SELECT login, prenom, nom FROM utilisateurs where 
-                login = '".$_SESSION['login']."' ";
+                } catch (PDOException $e) {
 
-                $exec_requete = mysqli_query($db,$requete);
+                    echo 'Connexion échouée : ' . $e->getMessage();
+                }
 
-                $reponse = mysqli_fetch_array($exec_requete);
-                
+                $requete = $db->prepare("SELECT login, prenom, nom FROM utilisateurs where 
+                login = '".$_SESSION['login']."' ");
+                $requete->execute(array());
+                $reponse = $requete->fetch(PDO::FETCH_ASSOC);
+            
                 ?>
                 <form class="inscription2" action="profil.php" method="POST">
                 <div>
@@ -109,12 +112,12 @@ session_start();
                     <input class="place" type="password" name="confirm_password" required placeholder="Password">
                 </div>
                 <br>
-                <input id="button" type="submit" name="envoyer" value="Envoyer" />
+                <input id="buttonvalid" type="submit" name="envoyer" value="Envoyer" />
                 <?php
-            //Connexion à une base 
-            $dsn = 'mysql:dbname=moduleconnexion;host=localhost';
-            $user = 'root';
-            $password = 'root';
+                    //Connexion à une base 
+                    $dsn = 'mysql:dbname=moduleconnexion;host=localhost';
+                    $user = 'root';
+                    $password = 'root';
  
                 try { //Vérification de la connexion 
                     //Premier essai avec PDO 
