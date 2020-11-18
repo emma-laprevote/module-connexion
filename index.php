@@ -44,8 +44,15 @@
 
                 <a href="connexion.php">Connexion »</a>
 
-                <a href="profil.php">Mon compte »</a>
-                
+                <?php
+                if($_SESSION['login'] == "") { ?>
+                    
+                <?php
+                    } else { ?>
+                    <a href="profil.php">Mon compte »</a>
+                <?php
+                    }
+                ?>
                 <a href="admin.php">Espace admin »</a>
             </nav>
 
@@ -97,7 +104,7 @@
 
                     <div class="articleprothese">
                         <h6>Tech</h6>
-                        <a id="lienarticle" href="#" target="_blank"><h1>Des amputés fabriquent leurs propres prothèses pour changer le monde</h1></a>
+                        <a id="lienarticle" href="#" target="_blank"><h1 id="titleprothese">Des amputés fabriquent leurs propres prothèses pour changer le monde</h1></a>
                         <p class="p1">Après des décennies de statu quo, des activistes bardés d'imprimantes 3D font 
                         souffler un vent de changement sur l'industrie des prothèses.</p>
                         <p class="p2">Sébastien Morelli</p>

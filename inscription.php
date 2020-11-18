@@ -41,10 +41,16 @@
             <a class="connex" href="inscription.php">Inscription »</a>
 
             <a href="connexion.php">Connexion »</a>
-
-            <a href="profil.php">Mon compte »</a>
-                
-            <a href="admin.php">Espace admin »</a>
+            <?php
+                if($_SESSION['login'] == "") { ?>
+                    
+                <?php
+                    } else { ?>
+                    <a href="profil.php">Mon compte »</a>
+                <?php
+                    }
+                ?>
+                <a href="admin.php">Espace admin »</a>
         </nav>
 
     </header>
@@ -80,8 +86,8 @@
                 </div>
                 <br>
                 <div>
-                    <label class="ins" for="passeword">Confirm password<span>*</span> :</label>
-                    <input class="place" type="password" name="password" required placeholder="Password">
+                    <label class="ins" for="confirm_passeword">Confirm password<span>*</span> :</label>
+                    <input class="place" type="password" name="confirm_password" required placeholder="Password">
                 </div>
                 <br>
                 <input id="button" type="submit" name="envoyer" value="Envoyer" />
@@ -94,21 +100,20 @@
  
                 try { //Vérification de la connexion 
                     //Premier essai avec PDO 
-                    $dbh = new PDO($dsn, $user, $password); // connexion PDO
+                    $db = new PDO($dsn, $user, $password); // connexion PDO
 
                 } catch (PDOException $e) {
 
                     echo 'Connexion échouée : ' . $e->getMessage();
                 }
 
-                $count = $dbh->prepare("SELECT COUNT(*) AS nbr FROM utilisateurs WHERE login =?");
+                $count = $db->prepare("SELECT COUNT(*) AS nbr FROM utilisateurs WHERE login =?");
                 $count->execute(array($_POST['login']));
                 $req  = $count->fetch(PDO::FETCH_ASSOC);
 
+                if (isset($_POST['envoyer']) && $req['nbr'] == 0 && $_POST['confirm_password'] == $_POST['password']) {
 
-                if (isset($_POST['envoyer']) && $req['nbr'] == 0) {
-
-                $sth = $dbh->prepare("INSERT INTO utilisateurs (login, prenom, nom, password) VALUES(?, ?, ?, ?)");
+                $sth = $db->prepare("INSERT INTO utilisateurs (login, prenom, nom, password) VALUES(?, ?, ?, ?)");
                 $sth->execute(array($_POST['login'], $_POST['prenom'], $_POST['nom'], $_POST['password']));
            
 
@@ -117,6 +122,9 @@
                 } elseif (isset($_POST['envoyer']) && $req['nbr'] == 1) { ?>
                     <p class="loginexist">*Le login est déjà utilisé</p>
                 <?php   
+                } elseif ($_POST['confirm_password'] != $_POST['password']) { ?>
+                    <p class="loginexist">* Les 2 mots de passe sont différents</p>
+                <?php
                 }
                 ?>
             </form>

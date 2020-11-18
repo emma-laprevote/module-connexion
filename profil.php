@@ -1,5 +1,5 @@
-<?php
-    session_start();
+<?php 
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -12,10 +12,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nova+Flat&family=Shadows+Into+Light&display=swap" rel="stylesheet">
+
    
  
     
-    <title>SLASH MAGAZINE</title>
+    <title>Mon compte</title>
 </head>
 
     <body>
@@ -47,20 +49,105 @@
                 <a href="connexion.php">Connexion »</a>
 
                 <a class="connex" href="profil.php">Mon compte »</a>
-                
+            
                 <a href="admin.php">Espace admin »</a>
             </nav>
 
         </header>
 
-    <main id="accueil">
+    <main id="compteadherent">
 
         <article>
 
-            <section id="freshnews">
+            <section id="freshnews2">
 
-                <h1 id="titleprofil">Mon compte</h1>
+                <div id="titlesmodif">
+                <h1 id="titlecompte">Mon compte</h1>
+                <p id="textmodif">Modifier les informations de votre compte.</p>
+                </div>
+    
+            <section id="form3">
+                <?php 
+                $db_username = 'root';
+                $db_password = 'root';
+                $db_name     = 'moduleconnexion';
+                $db_host     = 'localhost';
+                $db = mysqli_connect($db_host, $db_username, $db_password,$db_name)
+                or die('could not connect to database');
 
+                $requete = "SELECT login, prenom, nom FROM utilisateurs where 
+                login = '".$_SESSION['login']."' ";
+
+                $exec_requete = mysqli_query($db,$requete);
+
+                $reponse = mysqli_fetch_array($exec_requete);
+                
+                ?>
+                <form class="inscription2" action="profil.php" method="POST">
+                <div>
+                    <label class="ins" for="login">Nouveau Login<span>*</span> :</label>
+                    <input class="place" type="text" name="login" required placeholder="<?php echo $reponse['login'];?>">
+                </div>
+                <br>
+                <div>
+                <label class="ins" for="prenom">Prénom<span>*</span> :</label>
+                    <input class="place" type="text" name="prenom" required placeholder="<?php echo $reponse['prenom'];?>">
+                </div>
+                <br>
+                <div>
+                <label class="ins" for="nom">Nom<span>*</span> :</label>
+                    <input class="place" type="text" name="nom" required placeholder="<?php echo $reponse['nom'];?>">
+                </div>
+                <br>
+                <div>
+                    <label class="ins" for="passeword"> Nouveau Password<span>*</span> :</label>
+                    <input class="place" type="password" name="password" required placeholder="Password">
+                </div>
+                <br>
+                <div>
+                    <label class="ins" for="confirm_passeword">Confirm nouveau password<span>*</span> :</label>
+                    <input class="place" type="password" name="confirm_password" required placeholder="Password">
+                </div>
+                <br>
+                <input id="button" type="submit" name="envoyer" value="Envoyer" />
+                <?php
+            //Connexion à une base 
+            $dsn = 'mysql:dbname=moduleconnexion;host=localhost';
+            $user = 'root';
+            $password = 'root';
+ 
+                try { //Vérification de la connexion 
+                    //Premier essai avec PDO 
+                    $db = new PDO($dsn, $user, $password); // connexion PDO
+
+                } catch (PDOException $e) {
+
+                    echo 'Connexion échouée : ' . $e->getMessage();
+                }
+
+                $count = $db->prepare("SELECT COUNT(*) AS nbr FROM utilisateurs WHERE login =?");
+                $count->execute(array($_POST['login']));
+                $req  = $count->fetch(PDO::FETCH_ASSOC);
+
+
+                if (isset($_POST['envoyer']) && $req['nbr'] == 0 && $_POST['confirm_password'] == $_POST['password']) {
+
+                $sth = $db->prepare('UPDATE utilisateurs SET login= ?, prenom= ? , nom= ? , password= ? WHERE login = "'.$_SESSION['login'].'" ');
+                $sth->execute(array($_POST['login'], $_POST['prenom'], $_POST['nom'], $_POST['password']));
+           
+
+                header('Location: connexion.php');
+                
+                } elseif (isset($_POST['envoyer']) && $req['nbr'] == 1) { ?>
+                    <p class="loginexist">*Le login est déjà utilisé</p>
+                <?php   
+                }elseif ($_POST['confirm_password'] != $_POST['password']) { ?>
+                    <p class="loginexist">* Les 2 mots de passe sont différents</p>
+                <?php
+                }
+                ?>
+    
+                </form>
             </section>
 
         </article>

@@ -46,8 +46,15 @@ session_start();
 
                 <a class="connex" href="connexion.php">Connexion »</a>
 
-                <a href="profil.php">Mon compte »</a>
-                
+                <?php
+                if($_SESSION['login'] == "") { ?>
+                    
+                <?php
+                    } else { ?>
+                    <a href="profil.php">Mon compte »</a>
+                <?php
+                    }
+                ?>
                 <a href="admin.php">Espace admin »</a>
             </nav>
 
