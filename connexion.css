@@ -414,3 +414,10 @@ aside {
   width: 15em;
   margin: 3em 0 0 6em;
 }
+
+/* CSS PROFIL */
+
+#titleprofil {
+  font-family: "Permanent Marker", cursive;
+  font-size: 25px;
+}
