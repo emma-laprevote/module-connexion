@@ -1,6 +1,23 @@
 <?php
 session_start();
 
+    //Connexion à une base 
+    $dsn = 'mysql:dbname=moduleconnexion;host=localhost';
+    $user = 'root';
+    $password = 'root';
+
+    try { //Vérification de la connexion 
+    
+        $db = new PDO($dsn, $user, $password); // connexion PDO
+
+    } catch (PDOException $e) {
+
+        echo 'Connexion échouée : ' . $e->getMessage();
+    }
+
+    $username = ($_POST['login']); 
+    $password = ($_POST['password']);
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -66,16 +83,16 @@ session_start();
 
         <section class="form">
 
-            <form class="inscription" action="connexion.php" method="POST">
+            <form class="connexion" action="connexion.php" method="POST">
                 
                     <legend>CONNEXION ...</legend>
                     <br>
-                <div>
+                <div class="inputDiv">
                     <label class="ins" for="login">Login <span>*</span> :</label>
                     <input class="place" type="text" name="login" required placeholder="Nom d'utilisateur">
                 </div>
                 <br>
-                <div>
+                <div class="inputDiv">
                     <label class="ins" for="passeword">Password <span>*</span> :</label>
                     <input class="place" type="password" name="password" required placeholder="Password">
                 </div>
@@ -84,22 +101,6 @@ session_start();
                 <?php
                 if(isset($_POST['login']) && isset($_POST['password']))
                 {
-                    //Connexion à une base 
-                    $dsn = 'mysql:dbname=moduleconnexion;host=localhost';
-                    $user = 'root';
-                    $password = 'root';
- 
-                    try { //Vérification de la connexion 
-                        
-                        $db = new PDO($dsn, $user, $password); // connexion PDO
-
-                    } catch (PDOException $e) {
-
-                        echo 'Connexion échouée : ' . $e->getMessage();
-                    }
-
-                    $username = ($_POST['login']); 
-                    $password = ($_POST['password']);
                     
                     if (isset($_POST['envoyer'])) {
 
@@ -131,16 +132,14 @@ session_start();
             </form>
 
             </section>
+            
 
         </article>
-            <aside>
-                <div id="asidebloc">
-                <img id="journalism2" src="images/giphy2.gif" alt=" Animation ordinateur loading">
-                <h1 class='titleaside'>connect<br>and change the world!</h1>
-                </div>
-        </aside>
         </main>
-
+        <aside>
+            <img id="journalism2" src="images/giphy2.gif" alt=" Animation ordinateur loading">
+            <h1 class='titleaside'>connect<br>and change the world!</h1>
+        </aside>
         <footer></footer>
 
     </body>

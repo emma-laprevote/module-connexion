@@ -117,7 +117,7 @@
                     </section>
                     </div>
 
-                    <div class="presentslash">
+                    <div id="presentslash">
                         <h1 id="titleslash">SLASH/</h1>
                         <p id="textslash"><strong>Slash magazine</strong>, le magazine numérique dédié au journalisme libre et indépendant<br>
                     Mettez vos talents de rédacteur au profil du savoir et de l'information en adhérent à la communauté Slasher, in order to slash the world!<br>
@@ -128,7 +128,7 @@
 
                 <section id="press1">
 
-                    <div class="articleprothese">
+                    <div id="articleprothese">
                         <h6>Tech</h6>
                         <a id="lienarticle" href="#" target="_blank"><h1 id="titleprothese">Des amputés fabriquent leurs propres prothèses pour changer le monde</h1></a>
                         <p class="p1">Après des décennies de statu quo, des activistes bardés d'imprimantes 3D font 
@@ -136,9 +136,9 @@
                         <p class="p2">Sébastien Morelli</p>
                         <p class="p2">16.11.20</p>
                     </div>
-                    <div class="photo1">
+        
                         <img id="prothese" src="images/prothese.webp" alt="photo prohtese jambe">
-                    </div>
+        
                 </section>
 
             <section class="articlerow">

@@ -1,5 +1,28 @@
 <?php
     session_start();
+
+    //Connexion à une base 
+    $dsn = 'mysql:dbname=moduleconnexion;host=localhost';
+    $user = 'root';
+    $password = 'root';
+
+    $requete = "SELECT * FROM utilisateurs";
+
+        try { //Vérification de la connexion 
+        
+        $db = new PDO($dsn, $user, $password); // connexion PDO
+        $rep = $db->query($requete);
+
+        if($rep === false) {
+            die("Erreur");
+        }
+
+
+        } catch (PDOException $e) {
+
+            echo 'Connexion échouée : ' . $e->getMessage();
+
+        }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -57,7 +80,7 @@
                 <?php
                 if($_SESSION['login'] == 'admin') { ?>
 
-                    <a href="admin.php">Espace admin »</a>
+                    <a class="connex" href="admin.php">Espace admin »</a>
 
                 <?php
                 }
@@ -91,33 +114,7 @@
                     <h1 id="titlecompte">Espace admin</h1>
                     <p id="textmodif">Informations membres.</p>
                 </div>
-            <?php 
-
-                //Connexion à une base 
-                $dsn = 'mysql:dbname=moduleconnexion;host=localhost';
-                $user = 'root';
-                $password = 'root';
-
-                $requete = "SELECT * FROM utilisateurs";
-
-                try { //Vérification de la connexion 
-                    //Premier essai avec PDO 
-                    $db = new PDO($dsn, $user, $password); // connexion PDO
-                    $rep = $db->query($requete);
     
-                if($rep === false) {
-                    die("Erreur");
-                }
-    
-
-                } catch (PDOException $e) {
-
-                    echo 'Connexion échouée : ' . $e->getMessage();
-    
-                }
-
-            ?>
-
             <table>
                 <thead>
 

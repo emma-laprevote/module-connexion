@@ -1,5 +1,39 @@
 <?php 
 session_start();
+
+    //Connexion à une base 
+    $dsn = 'mysql:dbname=moduleconnexion;host=localhost';
+    $user = 'root';
+    $password = 'root';
+
+        try { //Vérification de la connexion 
+                
+            $db = new PDO($dsn, $user, $password); // connexion PDO
+
+        } catch (PDOException $e) {
+
+                echo 'Connexion échouée : ' . $e->getMessage();
+        }
+    //Requête qui va permettre de pré-remplir les champs du formulaire
+    $requete = $db->prepare("SELECT login, prenom, nom FROM utilisateurs where login = '".$_SESSION['login']."' ");
+    $requete->execute(array());
+    $reponse = $requete->fetch(PDO::FETCH_ASSOC);
+
+    //Requête qui va permettre de vérifier si le login existe déjà dans la base de donnée
+    $count = $db->prepare("SELECT COUNT(*) AS nbr FROM utilisateurs WHERE login =?");
+    $count->execute(array($_POST['login']));
+    $req  = $count->fetch(PDO::FETCH_ASSOC);
+
+
+        if (isset($_POST['envoyer']) && $req['nbr'] == 0 && $_POST['confirm_password'] == $_POST['password']) {
+
+            $sth = $db->prepare('UPDATE utilisateurs SET login= ?, prenom= ? , nom= ? , password= ? WHERE login = "'.$_SESSION['login'].'" ');
+            $sth->execute(array($_POST['login'], $_POST['prenom'], $_POST['nom'], $_POST['password']));
+
+
+            header('Location: connexion.php');
+
+        }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -97,83 +131,35 @@ session_start();
                 </div>
     
             <section id="form3">
-                <?php 
-                //Connexion à une base 
-                $dsn = 'mysql:dbname=moduleconnexion;host=localhost';
-                $user = 'root';
-                $password = 'root';
- 
-                try { //Vérification de la connexion 
-                    //Premier essai avec PDO 
-                    $db = new PDO($dsn, $user, $password); // connexion PDO
-
-                } catch (PDOException $e) {
-
-                    echo 'Connexion échouée : ' . $e->getMessage();
-                }
-
-                $requete = $db->prepare("SELECT login, prenom, nom FROM utilisateurs where 
-                login = '".$_SESSION['login']."' ");
-                $requete->execute(array());
-                $reponse = $requete->fetch(PDO::FETCH_ASSOC);
-            
-                ?>
                 <form class="inscription2" action="profil.php" method="POST">
-                <div>
+                <div class="inputDiv">
                     <label class="ins" for="login">Nouveau Login<span>*</span> :</label>
                     <input class="place" type="text" name="login" required placeholder="<?php echo $reponse['login'];?>">
                 </div>
                 <br>
-                <div>
+                <div class="inputDiv">
                 <label class="ins" for="prenom">Prénom<span>*</span> :</label>
                     <input class="place" type="text" name="prenom" required placeholder="<?php echo $reponse['prenom'];?>">
                 </div>
                 <br>
-                <div>
+                <div class="inputDiv">
                 <label class="ins" for="nom">Nom<span>*</span> :</label>
                     <input class="place" type="text" name="nom" required placeholder="<?php echo $reponse['nom'];?>">
                 </div>
                 <br>
-                <div>
+                <div class="inputDiv">
                     <label class="ins" for="passeword"> Nouveau Password<span>*</span> :</label>
                     <input class="place" type="password" name="password" required placeholder="Password">
                 </div>
                 <br>
-                <div>
+                <div class="inputDiv">
                     <label class="ins" for="confirm_passeword">Confirm nouveau password<span>*</span> :</label>
                     <input class="place" type="password" name="confirm_password" required placeholder="Password">
                 </div>
                 <br>
                 <input id="buttonvalid" type="submit" name="envoyer" value="Envoyer" />
                 <?php
-                    //Connexion à une base 
-                    $dsn = 'mysql:dbname=moduleconnexion;host=localhost';
-                    $user = 'root';
-                    $password = 'root';
- 
-                try { //Vérification de la connexion 
-                    //Premier essai avec PDO 
-                    $db = new PDO($dsn, $user, $password); // connexion PDO
-
-                } catch (PDOException $e) {
-
-                    echo 'Connexion échouée : ' . $e->getMessage();
-                }
-
-                $count = $db->prepare("SELECT COUNT(*) AS nbr FROM utilisateurs WHERE login =?");
-                $count->execute(array($_POST['login']));
-                $req  = $count->fetch(PDO::FETCH_ASSOC);
-
-
-                if (isset($_POST['envoyer']) && $req['nbr'] == 0 && $_POST['confirm_password'] == $_POST['password']) {
-
-                $sth = $db->prepare('UPDATE utilisateurs SET login= ?, prenom= ? , nom= ? , password= ? WHERE login = "'.$_SESSION['login'].'" ');
-                $sth->execute(array($_POST['login'], $_POST['prenom'], $_POST['nom'], $_POST['password']));
-           
-
-                header('Location: connexion.php');
-                
-                } elseif (isset($_POST['envoyer']) && $req['nbr'] == 1) { ?>
+                  if (isset($_POST['envoyer']) && $req['nbr'] == 1) { ?>
                     <p class="loginexist">*Le login est déjà utilisé</p>
                 <?php   
                 }elseif ($_POST['confirm_password'] != $_POST['password']) { ?>
