@@ -42,14 +42,46 @@ session_start();
             <nav>
                 <a href="index.php">Accueil »</a>
 
-                <a href="inscription.php">Inscription »</a>
+                <?php
+                if($_SESSION['login'] == "") { ?>
+                    <a href="inscription.php">Inscription »</a>
 
-                <a href="connexion.php">Connexion »</a>
+                    <a href="connexion.php">Connexion »</a>
+                    
+                <?php
+                    } else { ?>
+                    <a class="connex" href="profil.php">Mon compte »</a>
+                <?php
+                    }
+                ?>
+                <?php
+                if($_SESSION['login'] == 'admin') { ?>
 
-                <a class="connex" href="profil.php">Mon compte »</a>
-                
-                <a href="admin.php">Espace admin »</a>
+                    <a href="admin.php">Espace admin »</a>
+
+                <?php
+                }
+                ?>
             </nav>
+
+            <section id="deconnexion">
+                <?php
+                if($_SESSION['login'] == "") { ?>
+                
+                <?php
+                } else { ?>
+                    <form class="deconnect" action="index.php" method="POST">
+                    <input id="buttondeco" type="submit" name="deconnecter" value="Deconnection" />
+                    </form>
+                <?php
+                }
+                if(isset($_POST['deconnecter'])) {
+                    session_destroy();
+                    header('Location: index.php');
+                }
+                ?>
+                
+            </section>
 
         </header>
 

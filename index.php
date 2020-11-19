@@ -40,12 +40,11 @@
             <nav>
                 <a class="connex" href="index.php">Accueil »</a>
 
-                <a href="inscription.php">Inscription »</a>
-
-                <a href="connexion.php">Connexion »</a>
-
                 <?php
                 if($_SESSION['login'] == "") { ?>
+                    <a href="inscription.php">Inscription »</a>
+
+                    <a href="connexion.php">Connexion »</a>
                     
                 <?php
                     } else { ?>
@@ -53,7 +52,17 @@
                 <?php
                     }
                 ?>
-                <a href="admin.php">Espace admin »</a>
+
+                <?php
+
+                if($_SESSION['login'] == 'admin') { ?>
+
+                    <a href="admin.php">Espace admin »</a>
+                
+                <?php
+                }
+                ?>
+                
             </nav>
             <section id="deconnexion">
                 <?php
@@ -75,7 +84,7 @@
             </section>
         </header>
 
-    <main id="accueil">
+    <main>
 
         <article>
 
