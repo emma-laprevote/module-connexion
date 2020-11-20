@@ -15,8 +15,6 @@ session_start();
         echo 'Connexion échouée : ' . $e->getMessage();
     }
 
-    $login = $_POST['login']; 
-    $pass = $_POST['password'];
 
 ?>
 <!DOCTYPE html>
@@ -64,7 +62,7 @@ session_start();
                 <a class="connex" href="connexion.php">Connexion »</a>
 
                 <?php
-                if($_SESSION['login'] == "") { ?>
+                if(isset($_SESSION['login']) == "") { ?>
                     
                 <?php
                     } else { ?>
@@ -72,7 +70,14 @@ session_start();
                 <?php
                     }
                 ?>
-                <a href="admin.php">Espace admin »</a>
+                <?php
+                if(isset($_SESSION['login']) == 'admin') { ?>
+
+                    <a href="admin.php">Espace admin »</a>
+
+                <?php
+                }
+                ?>
             </nav>
 
         </header>
@@ -100,7 +105,12 @@ session_start();
                 <input id="button" type="submit" name="envoyer" value="Envoyer" /> 
                 <?php
                
-                    if (isset($_POST['envoyer']) && !empty($login) && !empty($pass)) {
+                    if (isset($_POST['envoyer'])) {
+
+                        $login = $_POST['login']; 
+                        $pass = $_POST['password'];
+
+                        if(!empty($login) && !empty($pass)) {
 
                         $loginS = htmlspecialchars(trim($login));
                         $passS = htmlspecialchars(trim($pass));
@@ -112,8 +122,8 @@ session_start();
                         $req->execute();
 
                         $username = $req->fetch(PDO::FETCH_OBJ);
+                        var_dump($username);
 
-                            //utilisé password_verify
                             if(!$username) { ?>
 
                                 <p class="loginexist">Ce nom d'utilisateur est incorrect...</p> 
@@ -128,7 +138,7 @@ session_start();
 
                                     $_SESSION['login'] = $username->login; 
                                     header('Location: index.php');
-
+                                    
                                 } else { ?>
 
                                     <p class="loginexist">Mot de passe incorrect...</p> 
@@ -136,10 +146,12 @@ session_start();
                                 <?php
                                 }
                      
-                            }
+                            }    
+                        
+                        }
                     
                     }
-                    ?>
+                     ?>
             </form>
 
             </section>

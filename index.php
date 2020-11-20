@@ -41,7 +41,7 @@
                 <a class="connex" href="index.php">Accueil »</a>
 
                 <?php
-                if($_SESSION['login'] == "") { ?>
+                if(isset($_SESSION['login']) == "") { ?>
                     <a href="inscription.php">Inscription »</a>
 
                     <a href="connexion.php">Connexion »</a>
@@ -55,7 +55,7 @@
 
                 <?php
 
-                if($_SESSION['login'] == 'admin') { ?>
+                if(isset($_SESSION['login']) === 'admin') { ?>
 
                     <a href="admin.php">Espace admin »</a>
                 
@@ -66,7 +66,7 @@
             </nav>
             <section id="deconnexion">
                 <?php
-                if($_SESSION['login'] == "") { ?>
+                if(isset($_SESSION['login']) == "") { ?>
                 
                 <?php
                 } else { ?>
@@ -98,14 +98,14 @@
                     </div>
                     <section class="buttons">
                     <?php
-                        if($_SESSION['login'] == "") {
-                            $user = $_SESSION['login'];
+                        if(isset($_SESSION['login']) == "") {
+                            //$user = $_SESSION['login'];
                                 // afficher un message
                             echo "<h3 id='identity2'>HELLO WORLD !</h3>
                             <a class='button2' href='connexion.php'>Connexion</a>
                             <a class='button1' href='inscription.php'>Inscription</a>";
 
-                        } elseif ($_SESSION['login'] != "") { 
+                        } elseif (isset($_SESSION['login']) != "") { 
                             $user = $_SESSION['login'];
 
                             echo "<h3 id='identity'>HELLO $user !</h3>
