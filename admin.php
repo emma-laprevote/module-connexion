@@ -4,7 +4,7 @@
     //Connexion à une base 
     $dsn = 'mysql:dbname=moduleconnexion;host=localhost';
     $user = 'root';
-    $password = 'root';
+    $password = '';
 
     $requete = "SELECT * FROM utilisateurs";
 
