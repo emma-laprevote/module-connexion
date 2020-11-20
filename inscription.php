@@ -16,16 +16,16 @@ session_start();
     }
     //Requête qui va permettre de vérifier si le login existe déjà dans la base de donnée
     $count = $db->prepare("SELECT COUNT(*) AS nbr FROM utilisateurs WHERE login =?");
-    $count->execute(array($_POST['login']));
+    $count->execute(array(isset($_POST['login'])));
     $req  = $count->fetch(PDO::FETCH_ASSOC);
 
-    $login = $_POST['login'];
-    $prenom = $_POST['prenom'];
-    $nom = $_POST['nom'];
-    $pass = $_POST['password'];
-    $confpass = $_POST['confirm_password'];
-
     if (isset($_POST['envoyer']) && $req['nbr'] == 0) {
+
+        $login = $_POST['login'];
+        $prenom = $_POST['prenom'];
+        $nom = $_POST['nom'];
+        $pass = $_POST['password'];
+        $confpass = $_POST['confirm_password'];
 
         if($pass == $confpass && !empty($login) && !empty($prenom) && !empty($nom) && !empty($pass) && !empty($confpass)) {
 
@@ -159,7 +159,7 @@ session_start();
 
                     <?php  
 
-                    } elseif ($confpass != $pass) { ?>
+                    } elseif (isset($confpass) != isset($pass)) { ?>
 
                         <p class="loginexist">* Les 2 mots de passe sont différents</p>
                     <?php
