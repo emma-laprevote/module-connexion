@@ -12,17 +12,14 @@
 
 /* CSS GLOBAL POUR LES TROIS PAGES */
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 html {
   background-color: #ffffff;
   background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='0.81' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
-}
-
-header {
-  width: 25%;
-  background-color: black;
-  min-height: 100vh;
-  margin: -30px;
-  padding-bottom: 30px;
 }
 
 body {
@@ -30,28 +27,34 @@ body {
   flex-direction: row;
 }
 
+header {
+  width: 20%;
+  background-color: black;
+  min-height: 100vh;
+}
+
 #logo {
   width: 75%;
-  margin: 4em 0 0 3em;
+  margin: 2em 0 0 2em;
 }
 
 nav {
   display: flex;
   flex-direction: column;
   margin-top: 17%;
-  padding-left: 50px;
+  padding-left: 13%;
 }
 
 a {
   color: white;
   text-decoration: none;
   font-family: "Rajdhani", sans-serif;
-  font-size: 18px;
+  font-size: 1.1em;
   margin-top: 10%;
 }
 
 .icones {
-  margin-left: 7em;
+  margin-left: 27%;
   opacity: 80%;
 }
 
@@ -61,16 +64,14 @@ a {
   background-color: white;
   color: black;
   width: 100%;
-  height: 30px;
-  padding-left: 10px;
-  padding-top: 6px;
+  height: 30%;
+  padding: 2%;
 }
 
 #freshnews {
   background-color: white;
   width: 65em;
   min-height: 100vh;
-  margin: 1em 0 0 1.9em;
   padding-bottom: 2em;
 }
 
@@ -81,7 +82,7 @@ a {
   border-bottom: solid 1px black;
 }
 
-.presentslash {
+#presentslash {
   width: 40em;
   background-color: black;
   height: 20em;
@@ -90,8 +91,7 @@ a {
 #titleslash {
   font-family: "Bebas Neue", cursive;
   font-size: 10em;
-  margin-top: -5px;
-  padding-right: 30px;
+  padding-right: 0.2em;
 }
 
 #titleslash,
@@ -102,9 +102,8 @@ a {
 
 #textslash {
   font-family: Helvetica, arial, sans-serif;
-  font-size: 14px;
-  padding: 5px 30px 20px 0;
-  margin-top: -16em;
+  font-size: 0.9em;
+  margin: -1em 2em 0 1em;
   line-height: 1.5em;
 }
 
@@ -188,13 +187,13 @@ a {
   height: 21em;
 }
 
-.articleprothese {
+#articleprothese {
   text-align: right;
-  margin: -1em 2em 0 2em;
+  margin: 2em 2em 0 2em;
 }
 
 #titleprothese {
-  margin-top: -1em;
+  margin: 0.5em 0 0.8em 0;
 }
 
 #lienarticle {
@@ -207,21 +206,23 @@ a {
   color: rgb(77, 75, 75);
 }
 
-.articleprothese h6 {
+#articleprothese h6 {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 12px;
+  font-size: 0.8em;
   text-decoration: underline;
 }
 
 .p1 {
   font-family: Helvetica, arial, sans-serif;
-  font-size: 14px;
+  font-size: 0.9em;
   line-height: 1.5em;
+  margin: 0.5em 0 1em 0;
 }
 
 .p2 {
   font-family: "Courier Prime", monospace;
-  font-size: 12px;
+  line-height: 2em;
+  font-size: 0.8em;
 }
 
 /* CSS ARTICLES*/
@@ -259,7 +260,7 @@ a {
 .articlegame h6 {
   margin: 2em 1em 0 1.5em;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 12px;
+  font-size: 0.8em;
   text-decoration: underline;
 }
 
@@ -267,7 +268,7 @@ a {
 #lienarticle3,
 #lienarticle4 {
   font-family: "Archivo Black", sans-serif;
-  font-size: 12px;
+  font-size: 0.9em;
   color: black;
 }
 
@@ -280,59 +281,63 @@ a {
 .p3 {
   margin: 1em 1em 0 1.5em;
   font-family: Helvetica, arial, sans-serif;
-  font-size: 12px;
+  font-size: 0.8em;
   line-height: 1.5em;
 }
 
 .p4 {
   font-family: "Courier Prime", monospace;
-  font-size: 12px;
+  font-size: 0.8em;
   margin-top: -0.1em;
   margin: 1em 1em 0 1.5em;
 }
 
 /* CSS INSCRIPTION */
 
-.formulaireconnex {
+#formulaireconnex {
   display: flex;
   flex-direction: row;
 }
 
 .inscription {
-  margin: 10em 0 0 2.5em;
+  margin: 10em 0 0 0.5em;
   text-align: left;
   background-color: #fff7f7;
   background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
-  padding: 20px 0 20px 45px;
+  padding: 2em 2em 1em 2em;
   box-shadow: 7px 5px 5px grey;
-  border-radius: 5px;
+  border-radius: 1em;
   width: 25em;
 }
 
 legend {
   font-family: "Permanent Marker", cursive;
-  font-size: 25px;
+  font-size: 1.5em;
 }
 
-.ins,
-.ins2 {
+.inputDiv {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ins {
   font-family: "Nova Flat", cursive;
-  font-size: 15px;
+  font-size: 1em;
   color: black;
-  vertical-align: top;
 }
 
 .place {
-  border-radius: 5px;
+  border-radius: 0.5em;
   font-family: "Courier Prime", monospace;
-  padding-left: 5px;
+  padding-left: 0.5em;
   color: black;
-  width: 200px;
-  height: 25px;
+  width: 50%;
+  height: 2em;
+  margin-left: -3em;
 }
 
 span {
-  font-size: 12px;
+  font-size: 0.8em;
   opacity: 90%;
 }
 
@@ -340,8 +345,6 @@ aside {
   width: 25em;
   background-color: white;
   min-height: 100vh;
-  margin: -30px;
-  padding-bottom: 30px;
   margin-left: 11.4em;
 }
 
@@ -401,6 +404,17 @@ aside {
 
 /* CSS CONNEXION */
 
+.connexion {
+  margin: 10em 0 0 0.5em;
+  text-align: left;
+  background-color: #fff7f7;
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+  padding: 2em 2em 1em 2em;
+  box-shadow: 7px 5px 5px grey;
+  border-radius: 1em;
+  width: 20em;
+}
+
 .form {
   margin-top: 15em;
 }
@@ -420,13 +434,9 @@ aside {
   padding-left: 1em;
 }
 
-#asidebloc {
-  margin-top: 10em;
-}
-
 #journalism2 {
   width: 15em;
-  margin-left: 6em;
+  margin: 8em 0 1em 5em;
 }
 
 /* CSS PROFIL */
@@ -439,15 +449,16 @@ aside {
 }
 
 #textmodif {
-  margin: -3.5em 0 0 3.5em;
+  margin-left: 3.5em;
   font-family: Helvetica, arial, sans-serif;
-  font-size: 14px;
+  font-size: 0.9em;
   color: white;
   padding-bottom: 2em;
 }
 
 #titlesmodif {
   background-color: black;
+  height: 6em;
 }
 
 #form3 {
@@ -458,7 +469,7 @@ aside {
   background-color: white;
   width: 45em;
   min-height: 90vh;
-  margin: 1em 0 0 1.8em;
+  margin-top: 2em;
   background-image: url("images/profil.jpg");
   background-size: cover;
 }
@@ -468,8 +479,42 @@ aside {
   text-align: left;
   background-color: #fff7f7;
   background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
-  padding: 20px 0 20px 45px;
+  padding: 2em;
   box-shadow: 7px 5px 5px grey;
   border-radius: 5px;
   width: 30em;
+}
+
+/* CSS ADMIN */
+
+table {
+  width: 80%;
+  margin: 5em 0 0 2.5em;
+  background-color: white;
+}
+
+thead {
+  background-color: black;
+}
+
+thead th {
+  color: white;
+  padding: 1em;
+  font-family: "Permanent Marker", cursive;
+  font-size: 1.3em;
+}
+
+table td {
+  padding: 1em;
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+#freshnews3 {
+  background-image: url("images/admin.jpg");
+  background-size: cover;
+  width: 65em;
+  min-height: 100vh;
+  margin-top: 1em;
 }

@@ -1,6 +1,23 @@
 <?php
 session_start();
 
+    //Connexion à une base 
+    $dsn = 'mysql:dbname=moduleconnexion;host=localhost';
+    $user = 'root';
+    $password = 'root';
+
+    try { //Vérification de la connexion 
+    
+        $db = new PDO($dsn, $user, $password); // connexion PDO
+
+    } catch (PDOException $e) {
+
+        echo 'Connexion échouée : ' . $e->getMessage();
+    }
+
+    $login = $_POST['login']; 
+    $pass = $_POST['password'];
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -66,81 +83,74 @@ session_start();
 
         <section class="form">
 
-            <form class="inscription" action="connexion.php" method="POST">
+            <form class="connexion" action="connexion.php" method="POST">
                 
                     <legend>CONNEXION ...</legend>
                     <br>
-                <div>
+                <div class="inputDiv">
                     <label class="ins" for="login">Login <span>*</span> :</label>
                     <input class="place" type="text" name="login" required placeholder="Nom d'utilisateur">
                 </div>
                 <br>
-                <div>
+                <div class="inputDiv">
                     <label class="ins" for="passeword">Password <span>*</span> :</label>
                     <input class="place" type="password" name="password" required placeholder="Password">
                 </div>
                 <br>
                 <input id="button" type="submit" name="envoyer" value="Envoyer" /> 
                 <?php
-                if(isset($_POST['login']) && isset($_POST['password']))
-                {
-                    //Connexion à une base 
-                    $dsn = 'mysql:dbname=moduleconnexion;host=localhost';
-                    $user = 'root';
-                    $password = 'root';
- 
-                    try { //Vérification de la connexion 
-                        
-                        $db = new PDO($dsn, $user, $password); // connexion PDO
+               
+                    if (isset($_POST['envoyer']) && !empty($login) && !empty($pass)) {
 
-                    } catch (PDOException $e) {
+                        $loginS = htmlspecialchars(trim($login));
+                        $passS = htmlspecialchars(trim($pass));
 
-                        echo 'Connexion échouée : ' . $e->getMessage();
-                    }
+                        $sql = "SELECT login, password FROM utilisateurs WHERE login = :login";
+                        $req = $db->prepare($sql);
 
-                    $username = ($_POST['login']); 
-                    $password = ($_POST['password']);
-                    
-                    if (isset($_POST['envoyer'])) {
+                        $req->bindParam(':login', $login);
+                        $req->execute();
 
-                        if($username !== "" && $password !== ""){
+                        $username = $req->fetch(PDO::FETCH_OBJ);
 
-                            $requete = $db->prepare("SELECT count(*) FROM utilisateurs where 
-                            login = '".$username."' and password = '".$password."' ");
-                            $requete->execute(array());
-                            $reponse = $requete->fetch(PDO::FETCH_ASSOC);
-            
-                            $count = $reponse['count(*)'];
+                            //utilisé password_verify
+                            if(!$username) { ?>
 
-    
-                                if($count!=0) // nom d'utilisateur et mot de passe correctes
-                                {
-                                    $_SESSION['login'] = $username; 
+                                <p class="loginexist">Ce nom d'utilisateur est incorrect...</p> 
+
+                            <?php
+                            } else {
+
+                                $mdp = $username->password;
+                                $validPassword = password_verify($passS, $mdp);
+
+                                if($validPassword) {
+
+                                    $_SESSION['login'] = $username->login; 
                                     header('Location: index.php');
-                                } 
-                                else
-                                { ?>
-                                    <p class="loginexist">Ton login ou ton mot de passe est incorrect...</p>  
+
+                                } else { ?>
+
+                                    <p class="loginexist">Mot de passe incorrect...</p> 
+                                
                                 <?php
                                 }
-                        }  
+                     
+                            }
+                    
                     }
-                }
-
-            ?>
+                    ?>
             </form>
 
             </section>
+            
 
         </article>
-            <aside>
-                <div id="asidebloc">
-                <img id="journalism2" src="images/giphy2.gif" alt=" Animation ordinateur loading">
-                <h1 class='titleaside'>connect<br>and change the world!</h1>
-                </div>
-        </aside>
         </main>
-
+        <aside>
+            <img id="journalism2" src="images/giphy2.gif" alt=" Animation ordinateur loading">
+            <h1 class='titleaside'>connect<br>and change the world!</h1>
+        </aside>
         <footer></footer>
 
     </body>
