@@ -4,7 +4,7 @@ session_start();
   //Connexion à une base 
   $dsn = 'mysql:dbname=moduleconnexion;host=localhost';
   $user = 'root';
-  $password = 'root';
+  $password = '';
 
     try { //Vérification de la connexion 
   
@@ -104,7 +104,7 @@ session_start();
                     }
                 ?>
             <?php
-                if($_SESSION['login'] == 'admin') { ?>
+                if($_SESSION['login'] === 'admin') { ?>
 
                     <a href="admin.php">Espace admin »</a>
 

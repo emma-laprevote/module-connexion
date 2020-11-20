@@ -4,7 +4,7 @@ session_start();
     //Connexion à une base 
     $dsn = 'mysql:dbname=moduleconnexion;host=localhost';
     $user = 'root';
-    $password = 'root';
+    $password = '';
 
     try { //Vérification de la connexion 
     
@@ -71,7 +71,7 @@ session_start();
                     }
                 ?>
                 <?php
-                if(isset($_SESSION['login']) == 'admin') { ?>
+                if($_SESSION['login'] === 'admin') { ?>
 
                     <a href="admin.php">Espace admin »</a>
 
@@ -122,7 +122,7 @@ session_start();
                         $req->execute();
 
                         $username = $req->fetch(PDO::FETCH_OBJ);
-                        var_dump($username);
+                        
 
                             if(!$username) { ?>
 

@@ -55,7 +55,7 @@
 
                 <?php
 
-                if(isset($_SESSION['login']) === 'admin') { ?>
+                if($_SESSION['login'] === 'admin') { ?>
 
                     <a href="admin.php">Espace admin »</a>
                 
