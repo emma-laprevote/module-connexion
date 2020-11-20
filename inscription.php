@@ -36,11 +36,15 @@ session_start();
             $passS = htmlspecialchars(trim($pass));
             $confpassS = htmlspecialchars(trim($confpass));
 
-            $cryptedpass = password_hash($pass, PASSWORD_BCRYPT);
+            $cryptedpass = password_hash($pass, PASSWORD_BCRYPT);//Cryptage du mot de passe 
         
-
-            $sth = $db->prepare("INSERT INTO utilisateurs (login, prenom, nom, password) VALUES(?, ?, ?, ?)");
-            $sth->execute(array("$loginS", "$prenomS", "$nomS", "$cryptedpass"));
+            //requete afin d'insérer les valeurs du formulaire dans ma base donnée, utilisatiin de bindvalue + sécurité
+            $request = $db->prepare('INSERT INTO utilisateurs (login, prenom, nom, password) VALUES(:login, :prenom, :nom, :password)');
+            $request->bindValue(':login', $loginS, PDO::PARAM_STR);
+            $request->bindValue(':prenom', $prenomS, PDO::PARAM_STR);
+            $request->bindValue(':nom', $nomS, PDO::PARAM_STR);
+            $request->bindValue(':password', $cryptedpass, PDO::PARAM_STR);
+            $request->execute()or die(print_r($request->errorInfo()));
 
 
             header('Location: connexion.php');

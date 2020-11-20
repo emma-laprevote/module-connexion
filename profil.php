@@ -24,12 +24,33 @@ session_start();
     $count->execute(array($_POST['login']));
     $req  = $count->fetch(PDO::FETCH_ASSOC);
 
+    $login = $_POST['login'];
+    $prenom = $_POST['prenom'];
+    $nom = $_POST['nom'];
+    $pass = $_POST['password'];
+    $confpass = $_POST['confirm_password'];
 
-        if (isset($_POST['envoyer']) && $req['nbr'] == 0 && $_POST['confirm_password'] == $_POST['password']) {
 
-            $sth = $db->prepare('UPDATE utilisateurs SET login= ?, prenom= ? , nom= ? , password= ? WHERE login = "'.$_SESSION['login'].'" ');
-            $sth->execute(array($_POST['login'], $_POST['prenom'], $_POST['nom'], $_POST['password']));
+        if (isset($_POST['envoyer']) && $req['nbr'] == 0) {
 
+            if($pass == $confpass && !empty($login) && !empty($prenom) && !empty($nom) && !empty($pass) && !empty($confpass)) {
+
+                //Précaution en plus au niveau de la sécurité en plus de PDO
+                $loginS = htmlspecialchars(trim($login));
+                $prenomS = htmlspecialchars(trim($prenom));
+                $nomS = htmlspecialchars(trim($nom));
+                $passS = htmlspecialchars(trim($pass));
+                $confpassS = htmlspecialchars(trim($confpass));
+
+                $cryptedpass = password_hash($pass, PASSWORD_BCRYPT);//Cryptage du mot de passe 
+            }            
+
+            $sth = $db->prepare('UPDATE utilisateurs SET login= :login, prenom= :prenom , nom= :nom , password= :password WHERE login = "'.$_SESSION['login'].'" ');
+            $sth->bindValue(':login', $loginS, PDO::PARAM_STR);
+            $sth->bindValue(':prenom', $prenomS, PDO::PARAM_STR);
+            $sth->bindValue(':nom', $nomS, PDO::PARAM_STR);
+            $sth->bindValue(':password', $cryptedpass, PDO::PARAM_STR);
+            $sth->execute()or die(print_r($request->errorInfo()));
 
             header('Location: connexion.php');
 
@@ -162,7 +183,7 @@ session_start();
                   if (isset($_POST['envoyer']) && $req['nbr'] == 1) { ?>
                     <p class="loginexist">*Le login est déjà utilisé</p>
                 <?php   
-                }elseif ($_POST['confirm_password'] != $_POST['password']) { ?>
+                }elseif ($confpass!= $pass) { ?>
                     <p class="loginexist">* Les 2 mots de passe sont différents</p>
                 <?php
                 }

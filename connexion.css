@@ -489,7 +489,7 @@ aside {
 
 table {
   width: 80%;
-  margin: 5em 0 0 6em;
+  margin: 5em 0 0 2.5em;
   background-color: white;
 }
 
@@ -507,7 +507,7 @@ thead th {
 table td {
   padding: 1em;
   font-family: Helvetica, arial, sans-serif;
-  font-size: 1em;
+  font-size: 0.9em;
   text-align: center;
 }
 

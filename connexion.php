@@ -15,8 +15,8 @@ session_start();
         echo 'Connexion échouée : ' . $e->getMessage();
     }
 
-    $username = ($_POST['login']); 
-    $password = ($_POST['password']);
+    $login = $_POST['login']; 
+    $pass = $_POST['password'];
 
 ?>
 <!DOCTYPE html>
@@ -99,36 +99,47 @@ session_start();
                 <br>
                 <input id="button" type="submit" name="envoyer" value="Envoyer" /> 
                 <?php
-                if(isset($_POST['login']) && isset($_POST['password']))
-                {
-                    
-                    if (isset($_POST['envoyer'])) {
+               
+                    if (isset($_POST['envoyer']) && !empty($login) && !empty($pass)) {
 
-                        if($username !== "" && $password !== ""){
+                        $loginS = htmlspecialchars(trim($login));
+                        $passS = htmlspecialchars(trim($pass));
 
-                            $requete = $db->prepare("SELECT count(*) FROM utilisateurs where 
-                            login = '".$username."' and password = '".$password."' ");
-                            $requete->execute(array());
-                            $reponse = $requete->fetch(PDO::FETCH_ASSOC);
-            
-                            $count = $reponse['count(*)'];
+                        $sql = "SELECT login, password FROM utilisateurs WHERE login = :login";
+                        $req = $db->prepare($sql);
 
-    
-                                if($count!=0) // nom d'utilisateur et mot de passe correctes
-                                {
-                                    $_SESSION['login'] = $username; 
+                        $req->bindParam(':login', $login);
+                        $req->execute();
+
+                        $username = $req->fetch(PDO::FETCH_OBJ);
+
+                            //utilisé password_verify
+                            if(!$username) { ?>
+
+                                <p class="loginexist">Ce nom d'utilisateur est incorrect...</p> 
+
+                            <?php
+                            } else {
+
+                                $mdp = $username->password;
+                                $validPassword = password_verify($passS, $mdp);
+
+                                if($validPassword) {
+
+                                    $_SESSION['login'] = $username->login; 
                                     header('Location: index.php');
-                                } 
-                                else
-                                { ?>
-                                    <p class="loginexist">Ton login ou ton mot de passe est incorrect...</p>  
+
+                                } else { ?>
+
+                                    <p class="loginexist">Mot de passe incorrect...</p> 
+                                
                                 <?php
                                 }
-                        }  
+                     
+                            }
+                    
                     }
-                }
-
-            ?>
+                    ?>
             </form>
 
             </section>
